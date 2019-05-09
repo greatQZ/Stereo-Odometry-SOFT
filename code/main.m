@@ -58,8 +58,10 @@ for t = 1 : num_of_images
     [R, tr, vo_previous] = visualSOFT(t, I1_l, I2_l, I1_r, I2_r, P1, P2, vo_params, vo_previous);
 
     %% Estimated pose relative to global frame at t = 0
-    pos = pos + Rpos * tr';
-    Rpos = R * Rpos;
+    
+    Rpos = R*Rpos;
+    pos = pos + Rpos' * tr';%tr should be rotated back to the global coordinate
+    
 
     %% Prepare frames for next iteration
     I1_l = I2_l;
